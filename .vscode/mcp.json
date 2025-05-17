@@ -1,12 +1,9 @@
 {
-    "servers": {
-        "local-mcp": {
-            "type": "stdio",
-            "command": "deno",
-            "args": [
-                "run",
-                "~/dev/mcp/server.ts"
-            ]
-        }
+  "servers": {
+    "local-mcp": {
+      "type": "stdio",
+      "command": "deno",
+      "args": ["run", "--allow-env", "~/dev/mcp/server.ts"]
     }
+  }
 }

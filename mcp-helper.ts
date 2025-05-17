@@ -135,7 +135,7 @@ export function createMCPServer<T extends Tools, P extends Prompts>(
     tools: toolList,
   }));
 
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  server.setRequestHandler(CallToolRequestSchema, (request) => {
     const args = request.params.arguments ?? {};
     try {
       const tool = tools.find((t) => t.name === request.params.name);
@@ -143,7 +143,7 @@ export function createMCPServer<T extends Tools, P extends Prompts>(
         throw new Error(`Tool ${request.params.name} not found`);
       }
       const handler = toolHandlers[request.params.name as T[number]["name"]];
-      const result = await handler(args);
+      const result = handler(args);
       const validatedResult = tool.outputSchema.parse(result);
       return {
         content: [
